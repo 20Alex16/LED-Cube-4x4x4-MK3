@@ -27,7 +27,7 @@ void nextAnim(){
 
 	currentFrame = 1;
 
-	repeatCount = 1;
+	repeatCount = 0;
 	maxRepeatCount = anims[currentAnim][0];
 }
 
@@ -35,6 +35,8 @@ void setup() {
 	Serial.begin(9600);
 	initLayers();
 	ir.enableIRIn();
+
+	maxAnims = sizeof(anims)/sizeof(anims[0]);
 
 	currentAnim = -1;
 	nextAnim(); // initialize anims
@@ -50,14 +52,11 @@ void loop() {
 				currentFrame = 1;
 				repeatCount++;
 			}
-			if(repeatCount >= maxRepeatCount) {
+			if(repeatCount >= maxRepeatCount)
 				nextAnim();
-			}
-
-			// Serial.println(currentFrame);
 		}
 
-	if (ir.decode(&adresa)) {
+	if (ir.decode(&adresa)) { //
 		Serial.print("Received: ");
 		Serial.println(adresa.value,HEX);
 
@@ -69,10 +68,10 @@ void loop() {
 				cubeState = !cubeState;
 				currentFrame = 1;
 				if(cubeState==false) setFrame(0);
-				Serial.println("on/off");
 			break;
 
 			default:
+				cubeState = true;
 				currentAnim = adresa.value%16 - 1;
 				nextAnim();
 			break;
