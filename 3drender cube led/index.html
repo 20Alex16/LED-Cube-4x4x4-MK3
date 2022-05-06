@@ -79,10 +79,29 @@
             border: 0;
         }
 
+        .button-bad{
+            display: flex;
+            flex-direction: row;
+            padding: 1em;
+            margin: auto;
+            margin-block: 1em;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-grow: 1;
+            background-color: red;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+            font-size: 1.5em;
+            border: 0;
+        }
+
         .special-button{
             display: flex;
             flex-direction: row;
-            padding: 0;
+            padding: 0.5em;
             height:50px;
             margin: auto;
             margin-block: 1em;
@@ -101,7 +120,10 @@
 
         .image{
             display: flex;
-            width: 15%;
+            aspect-ratio: 1;
+            max-width: 20%;
+            /* width-max: 30%; */
+            flex-shrink: 1;
             /* aspect-ratio: 5/1; */
             /* height: 100%; */
         }
@@ -146,6 +168,31 @@
             justify-content: space-around;
             gap: 0.5em;
         }
+
+        .wrapper-vert{
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            left:0;
+            padding: 0;
+            margin: 0;
+
+            align-items: flex-start;
+            justify-content: space-around;
+            gap: 0.5em;
+
+        }
+
+        .wrapper-grid{
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            margin: 0;
+            padding:0;
+            gap:0.2em;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
     </style>
 </head>
 <body>
@@ -163,15 +210,25 @@
     <div class="bubble frame">
         Frame: --/--
     </div>
-    <div class="wrapper">
+    <div class="wrapper-grid">
+        <div class="wrapper">
+            <button id="left" class="special-button">
+                <img src="https://img.icons8.com/flat-round/452/circled-left.png" alt="left" class="image">
+            </button>
+            
+            <button id="right" class="special-button">
+                <img src="https://img.icons8.com/flat-round/452/circled-right.png" alt="right" class="image">
+            </button>
+        </div>
 
-        <button id="left" class="special-button">
-            <img src="https://img.icons8.com/color/48/000000/left-squared.png" alt="left" class="image">
+        <button id="rightClone" class="special-button">
+            <div class="wrapper-grid" style="flex-grow: 0; justify-content: center;">
+                <img src="https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/344/external-clone-design-royyan-wijaya-detailed-outline-royyan-wijaya.png" class="image">
+                <img src="https://img.icons8.com/flat-round/452/circled-right.png" alt="right" class="image">
+            </div>
         </button>
 
-        <button id="right" class="special-button">
-            <img src="https://img.icons8.com/color/48/000000/right-squared.png" alt="right" class="image">
-        </button>
+
         <button id="delLastFrame" class="button">
             Delete last frame
         </button>
@@ -180,7 +237,7 @@
     <div class="wrapper">
         <button id="log" class="button">Log/copy frame config</button>
         <button id="frames" class="button">Show/copy frames</button>
-        <button id="reset" class="button">Reset</button>
+        <button id="reset" class="button-bad">Reset</button>
     </div>
     <div class="movement">
         <input id="slider" step="0.1" type="range" min="-5" max="5" value="0" class="X">

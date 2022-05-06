@@ -5,15 +5,14 @@ const buttonMultipleFrames = document.querySelector('#frames');
 const buttonDelFrame = document.querySelector('#delLastFrame');
 const frameLeft = document.querySelector('#left');
 const frameRight = document.querySelector('#right');
+const frameRightClone = document.querySelector('#rightClone')
 const frameLabel = document.querySelector('.frame');
 const buttonLayers = document.querySelectorAll(".buttonLayer")
 const reset = document.querySelector('#reset');
 const canvas = document.getElementById('rotating cube');
 const ctx = canvas.getContext('2d');
 
-var frames = [
-    [].fill(0, 0, 64),
-]
+var frames = [Array(64).fill(0)]
 var crtFrame = 0
 
 ctx.canvas.width = canvas.clientWidth;
@@ -286,17 +285,33 @@ frameLeft.addEventListener('click', () => {
 frameRight.addEventListener('click', () => {
     crtFrame++;
     if(crtFrame > frames.length-1)
-        frames.push([].fill(0, 0, 64));
+        frames.push(Array(64).fill(0));
+    updateFrame();
+})
+
+frameRightClone.addEventListener('click', () => {
+    crtFrame++;
+    if(crtFrame > frames.length-1)
+        frames.push(frames[frames.length-1].slice(0));
     updateFrame();
 })
 
 buttonMultipleFrames.addEventListener('click', () => {
-    console.log(frames[crtFrame])
+    // console.log(frames[crtFrame])
+    var res = ""
+    frames.forEach((table, pos) => {
+        res += "0b" + table.join('')
+        if (pos < frames.length - 1)
+            res += ",\n"
+    })
+    navigator.clipboard.writeText(res)
+    console.log(res)
+    console.log("Text copied to clipboard!")
 })
 
 buttonDelFrame.addEventListener('click', () => {
     frames.pop();
-    if(frames.length == 0) frames.push([].fill(0, 0, 64));
+    if(frames.length == 0) frames.push(Array(64).fill(0));
     // THIS PUSHES [] INSTEAD OF [000 ... 0000]
     crtFrame = Math.min(crtFrame, frames.length-1);
     updateFrame();
