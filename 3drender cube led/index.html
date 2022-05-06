@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script type="module" src="./components.js"></script> -->
+    <script type="module" src="renderer.js" defer></script>
+    <title>3D Renderer</title>
+
+    <style>
+        canvas{
+            width:100%;
+            flex-shrink: 1;
+            flex-grow: 1;
+            aspect-ratio: 1;
+            background-image: linear-gradient(-27deg, #e95eaf 0%, #f6d365 45%, #fda085 100%);
+
+            border-radius: 3em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-direction: column;
+            margin: auto;
+            margin-top: 3em;
+        }
+
+        .movement{
+            display: flex;
+            flex-direction: row;
+            padding: 1em;
+            margin: auto;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .movement::before{
+            content: "Movement";
+        }
+
+        .rotation{
+            display: flex;
+            flex-direction: row;
+            padding: 1em;
+            margin: auto;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        .rotation::before{
+            content: "Rotation";
+        }
+
+        #slider{
+            display: flex;
+            padding: 1em;
+            margin:0;
+            flex-direction: row;
+            border-radius: 10px;
+        }
+
+        .button{
+            display: flex;
+            flex-direction: row;
+            padding: 1em;
+            margin: auto;
+            margin-block: 1em;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-grow: 1;
+            background-color: dodgerblue;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+            font-size: 1.5em;
+            border: 0;
+        }
+
+        .special-button{
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+            height:50px;
+            margin: auto;
+            margin-block: 1em;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-grow: 1;
+            background-color: dodgerblue;
+            border-radius: 10px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+            font-size: 1.5em;
+            border: 0;
+        }
+
+        .image{
+            display: flex;
+            width: 15%;
+            /* aspect-ratio: 5/1; */
+            /* height: 100%; */
+        }
+
+        menu {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5em;
+            /* position: absolute; */
+        }
+
+        .bubble{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.1em;
+            margin: 0.5em;
+
+            color : #a0a0a0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bolder;
+            font-style: italic;
+            font-size: 2em;
+            
+            border-radius: 50px;
+            /* border-color: #a0a0a0;
+            border-style: solid; */
+        }
+        
+        .wrapper{
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            left:0;
+            padding: 0;
+            margin: 0;
+
+            align-items: flex-start;
+            justify-content: space-around;
+            gap: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <menu>
+            <button id="4" class="buttonLayer button">4</button>
+            <button id="3" class="buttonLayer button">3</button>
+            <button id="2" class="buttonLayer button">2</button>
+            <button id="1" class="buttonLayer button">1</button>
+        </menu>
+        <canvas id="rotating cube">
+        </canvas>
+    </div>
+
+    <div class="bubble frame">
+        Frame: --/--
+    </div>
+    <div class="wrapper">
+
+        <button id="left" class="special-button">
+            <img src="https://img.icons8.com/color/48/000000/left-squared.png" alt="left" class="image">
+        </button>
+
+        <button id="right" class="special-button">
+            <img src="https://img.icons8.com/color/48/000000/right-squared.png" alt="right" class="image">
+        </button>
+        <button id="delLastFrame" class="button">
+            Delete last frame
+        </button>
+    </div>
+
+    <div class="wrapper">
+        <button id="log" class="button">Log/copy frame config</button>
+        <button id="frames" class="button">Show/copy frames</button>
+        <button id="reset" class="button">Reset</button>
+    </div>
+    <div class="movement">
+        <input id="slider" step="0.1" type="range" min="-5" max="5" value="0" class="X">
+        <input id="slider" step="0.1" type="range" min="-5" max="5" value="0" class="Y">
+        <input id="slider" step="0.1" type="range" min="0.5" max="10" value="5" class="Z">
+    </div>
+
+    <div class="rotation">
+        <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotX">
+        <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotY">
+        <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotZ">
+    </div>
+</body>
+</html>
