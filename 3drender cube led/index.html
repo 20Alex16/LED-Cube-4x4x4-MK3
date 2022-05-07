@@ -9,8 +9,13 @@
     <title>3D Renderer</title>
 
     <style>
+        body {
+            display: flex;
+            justify-content: center;
+        }
+
         canvas{
-            width:100%;
+            width:80%;
             flex-shrink: 1;
             flex-grow: 1;
             aspect-ratio: 1;
@@ -131,6 +136,7 @@
         menu {
             display: flex;
             flex-direction: column;
+            width: 30%;
             justify-content: space-between;
             align-items: center;
             padding: 0.5em;
@@ -196,59 +202,68 @@
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <menu>
-            <button id="4" class="buttonLayer button">4</button>
-            <button id="3" class="buttonLayer button">3</button>
-            <button id="2" class="buttonLayer button">2</button>
-            <button id="1" class="buttonLayer button">1</button>
-        </menu>
-        <canvas id="rotating cube">
-        </canvas>
-    </div>
-
-    <div class="bubble frame">
-        Frame: --/--
-    </div>
-    <div class="wrapper-grid">
+    <div
+    style="
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: min(1000px, 100%);
+        /* align-self: cener; */
+        ">
         <div class="wrapper">
-            <button id="left" class="special-button">
-                <img src="https://img.icons8.com/flat-round/452/circled-left.png" alt="left" class="image">
+            <menu>
+                <button id="4" class="buttonLayer button">4</button>
+                <button id="3" class="buttonLayer button">3</button>
+                <button id="2" class="buttonLayer button">2</button>
+                <button id="1" class="buttonLayer button">1</button>
+            </menu>
+            <canvas id="rotating cube">
+            </canvas>
+        </div>
+
+        <div class="bubble frame">
+            Frame: --/--
+        </div>
+        <div class="wrapper-grid">
+            <div class="wrapper">
+                <button id="left" class="special-button">
+                    <img src="https://img.icons8.com/flat-round/452/circled-left.png" alt="left" class="image">
+                </button>
+                
+                <button id="right" class="special-button">
+                    <img src="https://img.icons8.com/flat-round/452/circled-right.png" alt="right" class="image">
+                </button>
+            </div>
+
+            <button id="rightClone" class="special-button">
+                <div class="wrapper-grid" style="flex-grow: 0; justify-content: center;">
+                    <img src="https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/344/external-clone-design-royyan-wijaya-detailed-outline-royyan-wijaya.png" class="image">
+                    <img src="https://img.icons8.com/flat-round/452/circled-right.png" alt="right" class="image">
+                </div>
             </button>
-            
-            <button id="right" class="special-button">
-                <img src="https://img.icons8.com/flat-round/452/circled-right.png" alt="right" class="image">
+
+
+            <button id="delLastFrame" class="button">
+                Delete last frame
             </button>
         </div>
 
-        <button id="rightClone" class="special-button">
-            <div class="wrapper-grid" style="flex-grow: 0; justify-content: center;">
-                <img src="https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/344/external-clone-design-royyan-wijaya-detailed-outline-royyan-wijaya.png" class="image">
-                <img src="https://img.icons8.com/flat-round/452/circled-right.png" alt="right" class="image">
-            </div>
-        </button>
+        <div class="wrapper">
+            <button id="log" class="button">Log/copy frame config</button>
+            <button id="frames" class="button">Show/copy frames</button>
+            <button id="reset" class="button-bad">Reset</button>
+        </div>
+        <div class="movement">
+            <input id="slider" step="0.1" type="range" min="-5" max="5" value="0" class="X">
+            <input id="slider" step="0.1" type="range" min="-5" max="5" value="0" class="Y">
+            <input id="slider" step="0.1" type="range" min="0.5" max="10" value="5" class="Z">
+        </div>
 
-
-        <button id="delLastFrame" class="button">
-            Delete last frame
-        </button>
-    </div>
-
-    <div class="wrapper">
-        <button id="log" class="button">Log/copy frame config</button>
-        <button id="frames" class="button">Show/copy frames</button>
-        <button id="reset" class="button-bad">Reset</button>
-    </div>
-    <div class="movement">
-        <input id="slider" step="0.1" type="range" min="-5" max="5" value="0" class="X">
-        <input id="slider" step="0.1" type="range" min="-5" max="5" value="0" class="Y">
-        <input id="slider" step="0.1" type="range" min="0.5" max="10" value="5" class="Z">
-    </div>
-
-    <div class="rotation">
-        <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotX">
-        <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotY">
-        <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotZ">
+        <div class="rotation">
+            <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotX">
+            <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotY">
+            <input id="slider" step="0.1" type="range" min="0" max="359" value="0" class="rotZ">
+        </div>
     </div>
 </body>
 </html>

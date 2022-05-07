@@ -74,8 +74,8 @@ function project(object, fov, aspect, near, far){
         //console.log(projected.get(0,3))
         //console.log(projected)
         
-        let offset = 260
-        let scale = 350
+        let offset = 350
+        let scale = 400
         
         x1 = x1 * scale + offset
         y1 = y1 * scale + offset

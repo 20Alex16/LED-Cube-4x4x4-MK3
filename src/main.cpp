@@ -11,6 +11,8 @@ bool cubeState = true;
 long long frameTime = 0;
 long long stateTime = 0;
 
+long delayTime;
+
 int currentAnim;
 int maxAnims;
 
@@ -28,7 +30,8 @@ void nextAnim(){
 	currentFrame = 1;
 
 	repeatCount = 0;
-	maxRepeatCount = anims[currentAnim][0];
+	maxRepeatCount = anims[currentAnim][0] & 0b11111111;
+	delayTime = anims[currentAnim][0] >> 8;
 }
 
 void setup() {
@@ -44,11 +47,11 @@ void setup() {
 
 void loop() {
 	if(cubeState)
-		if(millis() - frameTime > 50) { // 50 ms between frames
+		if(millis() - frameTime > delayTime) { // 50 ms between frames
 			frameTime = millis();
 
 			currentFrame++;
-			if(currentFrame >= 20 || anims[currentAnim][currentFrame] == 0) {
+			if(currentFrame >= 40 || anims[currentAnim][currentFrame] == 0) {
 				currentFrame = 1;
 				repeatCount++;
 			}
@@ -72,7 +75,7 @@ void loop() {
 
 			default:
 				cubeState = true;
-				currentAnim = adresa.value%16 - 1;
+				currentAnim = (adresa.value-1)%16 - 1;
 				nextAnim();
 			break;
 		}    
